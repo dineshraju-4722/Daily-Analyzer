@@ -1,19 +1,21 @@
-# Multi-stage build for optimized image
-# Stage 1: Build the application
-FROM gradle:8.5-jdk21 AS builder
+# -------- Stage 1: Build JAR with Gradle --------
+FROM gradle:8.5-jdk21 AS build
+
 WORKDIR /app
+
+# Copy source code
 COPY . .
-RUN gradle build -x test --no-daemon
 
-# Stage 2: Runtime image
-FROM openjdk:21-slim
+# Build the project
+RUN gradle build --no-daemon -x test
+
+# -------- Stage 2: Run the JAR with OpenJDK --------
+FROM eclipse-temurin:21-jdk
 WORKDIR /app
 
-# Copy the built JAR from builder stage
-COPY --from=builder /app/build/libs/*.jar app.jar
+# Copy JAR from previous stage
+COPY --from=build /app/build/libs/*.jar app.jar
 
-# Expose port 8080
 EXPOSE 8080
 
-# Run the application
-CMD ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
