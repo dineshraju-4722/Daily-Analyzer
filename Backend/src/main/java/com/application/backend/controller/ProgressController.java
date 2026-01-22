@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 @RestController
 @RequestMapping("/api/progress")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin("*")
 public class ProgressController {
     @Autowired
     private ProgressService progressService;
