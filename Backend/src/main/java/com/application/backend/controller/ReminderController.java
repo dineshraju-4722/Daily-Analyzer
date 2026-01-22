@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/reminders")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin("*")
 public class ReminderController {
     @Autowired
     private QuestionService questionService;

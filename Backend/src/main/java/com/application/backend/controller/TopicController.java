@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/topics")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin("*")
 public class TopicController {
     @Autowired
     private TopicService topicService;
