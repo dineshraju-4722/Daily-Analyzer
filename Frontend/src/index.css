@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+/* Global light, minimal scrollbars (keeps scroll, reduces visual weight) */
+:root {
+	--scrollbar-thumb: rgba(0, 0, 0, 0.18);
+	--scrollbar-thumb-hover: rgba(0, 0, 0, 0.28);
+}
+
+/* Firefox */
+* {
+	scrollbar-width: thin;
+	scrollbar-color: var(--scrollbar-thumb) transparent;
+}
+
+/* WebKit (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+::-webkit-scrollbar-thumb {
+	background-color: var(--scrollbar-thumb);
+	border-radius: 999px;
+	border: 2px solid transparent; /* creates a thin look */
+	background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+	background-color: var(--scrollbar-thumb-hover);
+}
+
+/* Utility: hide scrollbar but keep scrolling */
+.no-scrollbar {
+	-ms-overflow-style: none; /* IE/Edge */
+	scrollbar-width: none;    /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+	display: none;            /* WebKit */
+}
